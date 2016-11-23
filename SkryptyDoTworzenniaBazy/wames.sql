@@ -1,15 +1,19 @@
 --firma zajmuj¹ca siê tworzeniem gier komputerowych
+IF DB_ID('wames') IS NULL
+BEGIN
+	CREATE DATABASE wames
+END
+go
+use wames
 
-create database wames
-
-create table wames.dbo.headquarters
+CREATE TABLE wames.dbo.headquarters
 (
 	headquarters_id INT NOT NULL CONSTRAINT headquarters_PK PRIMARY KEY,
 	headquarters_name VARCHAR(20),
 	city VARCHAR(20)
 );
 
-create table wames.dbo.departments
+CREATE TABLE wames.dbo.departments
 (
 	department_id INT NOT NULL CONSTRAINT departments_PK PRIMARY KEY,
 	department_name VARCHAR(20),
@@ -18,7 +22,19 @@ create table wames.dbo.departments
 	CONSTRAINT headquarters_fk FOREIGN KEY (headquarters_id) REFERENCES wames.dbo.headquarters(headquarters_id)
 );
 
-create table wames.dbo.employees
+create table wames.dbo.positions
+(
+	position_id INT NOT NULL CONSTRAINT positions_PK PRIMARY KEY,
+	position_name VARCHAR(20)
+);
+CREATE TABLE dbo.Team
+(
+    team_id INT NOT NULL CONSTRAINT	team_PK PRIMARY KEY,
+	team_name VARCHAR(50),
+	
+);
+
+CREATE TABLE wames.dbo.employees
 (
 	employee_id    INT NOT NULL CONSTRAINT employees_PK PRIMARY KEY,
     first_name     VARCHAR(20),
@@ -28,28 +44,28 @@ create table wames.dbo.employees
 	salary         MONEY,
 	department_id  INT NOT NULL,
 	position_id INT NOT NULL,
+	team_id INT NOT NULL,
 	CONSTRAINT departments_fk FOREIGN KEY (department_id) REFERENCES wames.dbo.departments(department_id),
-	CONSTRAINT positions_fk FOREIGN KEY (position_id) REFERENCES wames.dbo.positions(position_id)
+	CONSTRAINT positions_fk FOREIGN KEY (position_id) REFERENCES wames.dbo.positions(position_id),
+	CONSTRAINT team_fk FOREIGN KEY (team_id) REFERENCES wames.dbo.Team(team_id)
 );
 
-
-
-create table wames.dbo.positions
+CREATE TABLE wames.dbo.genre
 (
-	position_id INT NOT NULL CONSTRAINT positions_PK PRIMARY KEY,
-	position_name VARCHAR(20)
+	genre_id INT NOT NULL CONSTRAINT genre_PK PRIMARY KEY,
+	genre_name varchar(20)
 );
 
-create table wames.dbo.games
+CREATE TABLE wames.dbo.games
 (
 	id INT NOT NULL CONSTRAINT games_PK PRIMARY KEY,
 	title VARCHAR(20),
 	price MONEY NOT NULL,
-	genre VARCHAR(20),
-	employee_id INT NOT NULL,
-	CONSTRAINT employee_fk FOREIGN KEY (employee_id) REFERENCES wames.dbo.employees(employee_id)
+	genre_id INT NOT NULL,
+	team_id INT NOT NULL,
+	CONSTRAINT teamFK FOREIGN KEY (team_id) REFERENCES wames.dbo.Team(team_id),
+	CONSTRAINT genre_fk FOREIGN KEY (genre_id) REFERENCES wames.dbo.genre(genre_id)
 );
-
 
 
 
