@@ -1,8 +1,10 @@
 --firma zajmuj¹ca siê tworzeniem gier komputerowych
-IF DB_ID('wames') IS NULL
+IF DB_ID('wames') IS NOT NULL
 BEGIN
-	CREATE DATABASE wames
+	DROP DATABASE wames
 END
+go
+CREATE DATABASE wames
 go
 use wames
 
@@ -56,6 +58,7 @@ CREATE TABLE wames.dbo.genre
 	genre_name varchar(20)
 );
 
+
 CREATE TABLE wames.dbo.games
 (
 	id INT NOT NULL CONSTRAINT games_PK PRIMARY KEY,
@@ -65,6 +68,21 @@ CREATE TABLE wames.dbo.games
 	team_id INT NOT NULL,
 	CONSTRAINT teamFK FOREIGN KEY (team_id) REFERENCES wames.dbo.Team(team_id),
 	CONSTRAINT genre_fk FOREIGN KEY (genre_id) REFERENCES wames.dbo.genre(genre_id)
+);
+
+CREATE TABLE wames.dbo.availablePlatforms
+(
+    platformId VARCHAR(3) NOT NULL CONSTRAINT platformPK PRIMARY KEY,
+    platformName VARCHAR(20) NULL,
+	
+);
+
+CREATE TABLE dbo.gamePlatform
+(
+    gameId INT NOT NULL,
+	platformId Varchar(3) NOT NULL,
+	CONSTRAINT gameFK FOREIGN KEY (gameId) REFERENCES wames.dbo.games(id),
+	CONSTRAINT platformFK FOREIGN KEY (platformId) REFERENCES wames.dbo.availablePlatforms(platformId)
 );
 
 
