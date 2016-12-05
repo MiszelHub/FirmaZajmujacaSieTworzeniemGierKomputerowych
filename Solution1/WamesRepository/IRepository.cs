@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WamesRepository
 {
-    interface IRepository<T> where T: class
+    public interface IRepository<T> where T: class
     {
         void AddEntityToDatabase(T Entity);
         void AddRangeOfEntities(IEnumerable<T> range);
