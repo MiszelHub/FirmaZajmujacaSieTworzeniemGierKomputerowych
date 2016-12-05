@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace WamesRepository
 {
-    interface IRepository<T>
+    interface IRepository<T> where T: class
     {
-        void Add(T Entity);
+        void AddEntityToDatabase(T Entity);
+        void AddRangeOfEntities(IEnumerable<T> range);
+        IEnumerable<T> GetAllEtitiesFromDataBase();
+        void RemoveEntityFromDataBase(T entity);
+        void RemoveRangeOfEntitiesFromDB(IEnumerable<T> entities);
+        IEnumerable<T> FindInDataBase(Func<T,bool> predicate);
 
     }
 }

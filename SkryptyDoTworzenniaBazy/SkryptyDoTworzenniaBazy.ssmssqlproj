@@ -3,10 +3,10 @@
   <Items>
     <LogicalFolder Name="Connections" Type="2" Sorted="true">
       <Items>
-        <ConnectionNode Name="USER-KOMPUTER\SQLEXPRESS:USER-KOMPUTER\user">
-          <Created>2016-11-23T18:00:38.718521+01:00</Created>
+        <ConnectionNode Name="L434-7\SQLEXPRESS:LAN\student">
+          <Created>2016-12-05T14:30:05.1397725+01:00</Created>
           <Type>SQL</Type>
-          <Server>USER-KOMPUTER\SQLEXPRESS</Server>
+          <Server>L434-7\SQLEXPRESS</Server>
           <UserName />
           <Authentication>Windows Authentication</Authentication>
           <InitialDB />
@@ -20,8 +20,8 @@
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
         <FileNode Name="wames.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:USER-KOMPUTER\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>USER-KOMPUTER\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:L434-7\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>L434-7\SQLEXPRESS</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>wames.sql</FullPath>
         </FileNode>
