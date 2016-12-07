@@ -51,15 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmployeeRepository.cs" />
     <Compile Include="EntitiesClasses\availablePlatforms.cs" />
     <Compile Include="EntitiesClasses\departments.cs" />
     <Compile Include="EntitiesClasses\employees.cs" />
     <Compile Include="EntitiesClasses\games.cs" />
     <Compile Include="EntitiesClasses\genre.cs" />
     <Compile Include="EntitiesClasses\headquarters.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="WamesModel.cs" />
     <Compile Include="EntitiesClasses\positions.cs" />
-    <Compile Include="Repository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntitiesClasses\Team.cs" />
