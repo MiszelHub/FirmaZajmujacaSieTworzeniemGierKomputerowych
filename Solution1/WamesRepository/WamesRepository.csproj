@@ -58,7 +58,10 @@
     <Compile Include="EntitiesClasses\games.cs" />
     <Compile Include="EntitiesClasses\genre.cs" />
     <Compile Include="EntitiesClasses\headquarters.cs" />
+    <Compile Include="IEmployeeRepository.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="UnitOfWork.cs" />
     <Compile Include="WamesModel.cs" />
     <Compile Include="EntitiesClasses\positions.cs" />
     <Compile Include="IRepository.cs" />
