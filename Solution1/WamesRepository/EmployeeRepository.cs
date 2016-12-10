@@ -19,8 +19,6 @@ namespace WamesRepository
             var employeedoRemove = GetAllEtitiesFromDataBase().SingleOrDefault(x => x.employee_id == id);
 
             RemoveEntityFromDataBase(employeedoRemove);
-
-            context.SaveChanges();
             
         }
 
