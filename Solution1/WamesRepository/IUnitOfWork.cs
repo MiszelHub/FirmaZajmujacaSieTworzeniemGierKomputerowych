@@ -9,6 +9,7 @@ namespace WamesRepository
     public interface IUnitOfWork :IDisposable
     {
         IEmployeeRepository Employees { get;}
+        IHeadQuartersReposotory HeadQuarters { get; }
         void ProcesChanges();
     }
 }

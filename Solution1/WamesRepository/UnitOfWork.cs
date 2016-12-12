@@ -14,8 +14,12 @@ namespace WamesRepository
         {
             this.wamesContext = wamesContext;
             Employees = new EmployeeRepository(wamesContext);
+            HeadQuarters = new HeadQuartersRepository(wamesContext);
         }
         public IEmployeeRepository Employees { get; private set; }
+
+        public IHeadQuartersReposotory HeadQuarters { get; private set;}
+
 
         public void Dispose()
         {

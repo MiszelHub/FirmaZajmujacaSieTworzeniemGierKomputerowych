@@ -58,7 +58,9 @@
     <Compile Include="EntitiesClasses\games.cs" />
     <Compile Include="EntitiesClasses\genre.cs" />
     <Compile Include="EntitiesClasses\headquarters.cs" />
+    <Compile Include="HeadQuartersRepository.cs" />
     <Compile Include="IEmployeeRepository.cs" />
+    <Compile Include="IHeadQuartersReposotory.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="UnitOfWork.cs" />
