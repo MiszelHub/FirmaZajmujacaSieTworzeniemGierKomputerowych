@@ -10,16 +10,19 @@ namespace WamesGUI.ViewModel
     
     public class MainWindowViewModel : ViewModelBase
     {
-        private ObservableCollection<headquarters> headQuarters;
+        private ObservableCollection<departments> headQuarters;
         private ObservableCollection<string> test;
         private UnitOfWork unitOfWork;
         public MainWindowViewModel()
         {
-            headQuarters = new ObservableCollection<headquarters>();
+            headQuarters = new ObservableCollection<departments>();
             unitOfWork = new UnitOfWork(new WamesModel());
             test = new ObservableCollection<string>();
-          //  FillTEstData();
+            FillTEstData();
             RefreshEmployeeList();
+            //foreach (var item in headQuarters)
+            //    unitOfWork.BeginTransaction(() => unitOfWork.HeadQuarters.RemoveEntityFromDataBase(item));
+            //test.Clear();
         }
 
         public ObservableCollection<string> HeadQuarters
@@ -30,10 +33,10 @@ namespace WamesGUI.ViewModel
             }
 
         }
-        public headquarters SelectedHeadQuarters { get; set; }
+        public departments SelectedHeadQuarters { get; set; }
         public void RefreshEmployeeList()
         {
-            foreach (var item in unitOfWork.HeadQuarters.GetAllEtitiesFromDataBase())
+            foreach (var item in unitOfWork.Departments.GetAllEtitiesFromDataBase())
             {
                 headQuarters.Add(item);
                 test.Add(item.ToString());
@@ -41,15 +44,9 @@ namespace WamesGUI.ViewModel
         }
         public void FillTEstData()
         {
-           
-            headquarters head = new headquarters();
-            head.headquarters_id = 1;
-            head.headquarters_name = "testHeadquarters";
-            head.city = "Lodz";
-           
-            unitOfWork.HeadQuarters.AddEntityToDatabase(head);
-            unitOfWork.ProcesChanges();
-        }   
+
+            unitOfWork.Departments.GetDepartmentsFormHeadQuarters("MainHeadQuarters");
+        }
     }
    
 }

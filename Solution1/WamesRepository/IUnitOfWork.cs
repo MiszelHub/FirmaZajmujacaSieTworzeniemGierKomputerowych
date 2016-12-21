@@ -10,6 +10,8 @@ namespace WamesRepository
     {
         IEmployeeRepository Employees { get;}
         IHeadQuartersReposotory HeadQuarters { get; }
+        IDepartmentsRepository Departments { get; }
         void ProcesChanges();
+        void BeginTransaction(Action action);
     }
 }

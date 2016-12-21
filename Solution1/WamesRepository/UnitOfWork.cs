@@ -15,11 +15,28 @@ namespace WamesRepository
             this.wamesContext = wamesContext;
             Employees = new EmployeeRepository(wamesContext);
             HeadQuarters = new HeadQuartersRepository(wamesContext);
+            Departments = new DepartmentsRepository(wamesContext);
         }
+
+        public IDepartmentsRepository Departments { get; private set; }
+
+
         public IEmployeeRepository Employees { get; private set; }
 
         public IHeadQuartersReposotory HeadQuarters { get; private set;}
 
+        public void BeginTransaction(Action action)
+        {
+            using (var dbtransaction = wamesContext.Database.BeginTransaction())
+            {
+                action?.Invoke();
+                ProcesChanges();
+                dbtransaction.Commit();
+
+
+            }
+            
+        }
 
         public void Dispose()
         {
