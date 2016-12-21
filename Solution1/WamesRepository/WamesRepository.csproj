@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repositories\GamesRepository.cs" />
     <Compile Include="Repositories\DepartmentsRepository.cs" />
     <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="EntitiesClasses\availablePlatforms.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Repositories\HeadQuartersRepository.cs" />
     <Compile Include="Repositories\IDepartmentsRepository.cs" />
     <Compile Include="Repositories\IEmployeeRepository.cs" />
+    <Compile Include="Repositories\IGamesRepository.cs" />
     <Compile Include="Repositories\IHeadQuartersReposotory.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Repositories\Repository.cs" />

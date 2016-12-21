@@ -16,12 +16,16 @@ namespace WamesRepository
             Employees = new EmployeeRepository(wamesContext);
             HeadQuarters = new HeadQuartersRepository(wamesContext);
             Departments = new DepartmentsRepository(wamesContext);
+            Games = new GamesRepository(wamesContext);
         }
 
         public IDepartmentsRepository Departments { get; private set; }
 
 
         public IEmployeeRepository Employees { get; private set; }
+
+        public IGamesRepository Games { get; private set; }
+
 
         public IHeadQuartersReposotory HeadQuarters { get; private set;}
 

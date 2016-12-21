@@ -11,6 +11,7 @@ namespace WamesRepository
         IEmployeeRepository Employees { get;}
         IHeadQuartersReposotory HeadQuarters { get; }
         IDepartmentsRepository Departments { get; }
+        IGamesRepository Games { get; }
         void ProcesChanges();
         void BeginTransaction(Action action);
     }

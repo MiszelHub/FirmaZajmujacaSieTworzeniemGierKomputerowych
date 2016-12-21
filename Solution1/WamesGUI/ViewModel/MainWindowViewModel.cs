@@ -10,12 +10,12 @@ namespace WamesGUI.ViewModel
     
     public class MainWindowViewModel : ViewModelBase
     {
-        private ObservableCollection<departments> headQuarters;
+        private ObservableCollection<games> games;
         private ObservableCollection<string> test;
         private UnitOfWork unitOfWork;
         public MainWindowViewModel()
         {
-            headQuarters = new ObservableCollection<departments>();
+            games = new ObservableCollection<games>();
             unitOfWork = new UnitOfWork(new WamesModel());
             test = new ObservableCollection<string>();
             FillTEstData();
@@ -36,16 +36,16 @@ namespace WamesGUI.ViewModel
         public departments SelectedHeadQuarters { get; set; }
         public void RefreshEmployeeList()
         {
-            foreach (var item in unitOfWork.Departments.GetAllEtitiesFromDataBase())
+            foreach (var item in unitOfWork.Games.GetAllEtitiesFromDataBase())
             {
-                headQuarters.Add(item);
+                games.Add(item);
                 test.Add(item.ToString());
             }
         }
         public void FillTEstData()
         {
 
-            unitOfWork.Departments.GetDepartmentsFormHeadQuarters("MainHeadQuarters");
+            unitOfWork.Games.GetGamesForSpecifiedPlatform("WIN");
         }
     }
    
