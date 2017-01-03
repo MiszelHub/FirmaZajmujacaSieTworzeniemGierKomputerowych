@@ -14,6 +14,15 @@ namespace WamesRepository
         {
 
         }
+
+        public IEnumerable<games> GetGamesByGenre(string genre)
+        {
+            var param = new SqlParameter("@Genre", genre);
+
+            var querry = context.Database.SqlQuery<games>("GetGamesByGenre", param);
+            return querry;
+        }
+
         public IEnumerable<games> GetGamesForSpecifiedPlatform(string platform)
         {
             var param = new SqlParameter("@GamePlatform", platform);

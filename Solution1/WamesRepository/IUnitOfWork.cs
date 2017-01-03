@@ -12,6 +12,7 @@ namespace WamesRepository
         IHeadQuartersReposotory HeadQuarters { get; }
         IDepartmentsRepository Departments { get; }
         IGamesRepository Games { get; }
+        IGenresRepository Genres { get; }
         void ProcesChanges();
         void BeginTransaction(Action action);
     }

@@ -9,5 +9,6 @@ namespace WamesRepository
     public interface IGamesRepository :IRepository<games>
     {
         IEnumerable<games> GetGamesForSpecifiedPlatform(string platform);
+        IEnumerable<games> GetGamesByGenre(string genre);
     }
 }

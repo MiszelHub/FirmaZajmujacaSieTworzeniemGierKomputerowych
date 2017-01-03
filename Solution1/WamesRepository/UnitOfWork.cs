@@ -17,6 +17,7 @@ namespace WamesRepository
             HeadQuarters = new HeadQuartersRepository(wamesContext);
             Departments = new DepartmentsRepository(wamesContext);
             Games = new GamesRepository(wamesContext);
+            Genres = new GenreRepository(wamesContext);
         }
 
         public IDepartmentsRepository Departments { get; private set; }
@@ -26,8 +27,9 @@ namespace WamesRepository
 
         public IGamesRepository Games { get; private set; }
 
-
         public IHeadQuartersReposotory HeadQuarters { get; private set;}
+
+        public IGenresRepository Genres { get; private set; }
 
         public void BeginTransaction(Action action)
         {

@@ -6,14 +6,125 @@
         xmlns:local="clr-namespace:WamesGUI"
         xmlns:viewmodel="clr-namespace:WamesGUI.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Background="Black">
+        Title="MainWindow" Height="550" Width="830" 
+        WindowStartupLocation="Manual" 
+        Left="250" Top="70">
     <Window.Resources>
         <viewmodel:MainWindowViewModel x:Key="MyViewModel"/>
     </Window.Resources>
-    <Grid DataContext="{StaticResource MyViewModel}">
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="145" Margin="0,10,0,0" VerticalAlignment="Top" Width="517" 
+    <Grid DataContext="{StaticResource MyViewModel}" Background="#FF363636">
+        <TextBlock HorizontalAlignment="Left" Height="34" Margin="26,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" FontSize="22" Foreground="White" Text="Browse Wames data" RenderTransformOrigin="0.417,0.101"/>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="150" Margin="26,72,0,0" VerticalAlignment="Top" Width="765" 
                  ItemsSource="{Binding HeadQuarters}" SelectedItem="{Binding SelectedHeadQuarters}"
-                 Background="White" FontStyle="Normal" BorderThickness="1"/>
+                 Background="#FF363636" FontSize="14" Foreground="#FFF"  FontStyle="Normal" BorderThickness="1"/>
+        <ListBox Name="TablesList" Margin="26,290,592,100" Background="#FF363636" FontSize="14" Foreground="#FFF"  RenderTransformOrigin="0.55,1.322" ItemsSource="{Binding DBTables}" SelectedItem="{Binding SelectedDBTable}"/>
 
+        <TextBlock Name="AvailableTables" HorizontalAlignment="Left" Height="27" Margin="24,258,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Width="204" FontSize="15" Foreground="White" Text="Available tables"/>
+        <TextBlock x:Name="FilterData" HorizontalAlignment="Left" Height="27" Margin="278,258,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Width="285" FontSize="15" Foreground="White" Text="Available filters"/>
+        <ListBox x:Name="FiltersList" Margin="278,290,259,100" Background="#FF363636" FontSize="14" Foreground="#FFF"  RenderTransformOrigin="0.55,1.322" ItemsSource="{Binding Filters}" SelectedItem="{Binding SelectedFilter}"/>
+        <TextBlock x:Name="SelectedValue" HorizontalAlignment="Left" Height="27" Margin="606,258,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Width="185" FontSize="15" Foreground="White" Text="Selected filter value"/>
+
+        <TextBox Name="FilterValue" Text="{Binding SelectedItem, ElementName=FiltersList}" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="27" Margin="606,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185" RenderTransformOrigin="0.253,0.809"/>
+
+        <Button x:Name="FilterButton" Content="Apply filter" HorizontalAlignment="Left" Margin="606,373,0,0" VerticalAlignment="Top" Width="185" Height="38" Cursor="Hand" Foreground="White" RenderTransformOrigin="1.044,1.747">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF363636"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="2">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="FontSize" Value="18.667"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF9C9C9C"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#FFD6D6D6"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="606,454,0,0" VerticalAlignment="Top" Width="185" Height="38" Cursor="Hand" Foreground="White" RenderTransformOrigin="1.044,1.747" Command="{Binding Path=CloseCommand}">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF363636"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="2">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="FontSize" Value="18.667"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF9C9C9C"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#FFD6D6D6"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="AddGameButton" Content="Add game" HorizontalAlignment="Left" Margin="26,454,0,0" VerticalAlignment="Top" Width="185" Height="38" Cursor="Hand" Foreground="White" RenderTransformOrigin="1.044,1.747" Command="{Binding Path=AddGameCommand}">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF363636"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="2">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="FontSize" Value="18.667"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF9C9C9C"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#FFD6D6D6"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="AddEmployeeButton" Content="Add employee" HorizontalAlignment="Left" Margin="278,454,0,0" VerticalAlignment="Top" Width="185" Height="38" Cursor="Hand" Foreground="White" RenderTransformOrigin="1.044,1.747" Command="{Binding Path=AddEmployeeCommand}">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FF363636"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="2">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="FontSize" Value="18.667"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF9C9C9C"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#FFD6D6D6"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>
