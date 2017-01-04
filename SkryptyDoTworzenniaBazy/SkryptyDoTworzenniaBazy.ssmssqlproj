@@ -3,10 +3,10 @@
   <Items>
     <LogicalFolder Name="Connections" Type="2" Sorted="true">
       <Items>
-        <ConnectionNode Name="L434-7\SQLEXPRESS:USER-KOMPUTER\user">
-          <Created>2016-12-05T14:30:05.1397725+01:00</Created>
+        <ConnectionNode Name="L441-10:LAN\student">
+          <Created>2017-01-04T12:05:01.7996918+01:00</Created>
           <Type>SQL</Type>
-          <Server>L434-7\SQLEXPRESS</Server>
+          <Server>L441-10</Server>
           <UserName />
           <Authentication>Windows Authentication</Authentication>
           <InitialDB />
@@ -15,7 +15,7 @@
           <ConnectionProtocol>NotSpecified</ConnectionProtocol>
           <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
         </ConnectionNode>
-        <ConnectionNode Name="USER-KOMPUTER\SQLEXPRESS:USER-KOMPUTER\user">
+        <ConnectionNode Name="USER-KOMPUTER\SQLEXPRESS:LAN\student">
           <Created>2016-12-20T22:39:01.5126585+01:00</Created>
           <Type>SQL</Type>
           <Server>USER-KOMPUTER\SQLEXPRESS</Server>
@@ -31,11 +31,23 @@
     </LogicalFolder>
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
+        <FileNode Name="dane.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:L441-10:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>L441-10</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>dane.sql</FullPath>
+        </FileNode>
         <FileNode Name="ProceduryDoEmployees.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:USER-KOMPUTER\SQLEXPRESS:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>USER-KOMPUTER\SQLEXPRESS</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>ProceduryDoEmployees.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SQLQuery1.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery1.sql</FullPath>
         </FileNode>
         <FileNode Name="wames.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:USER-KOMPUTER\SQLEXPRESS:True</AssociatedConnectionMoniker>
