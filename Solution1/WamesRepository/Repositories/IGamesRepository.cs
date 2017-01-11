@@ -10,5 +10,7 @@ namespace WamesRepository
     {
         IEnumerable<games> GetGamesForSpecifiedPlatform(string platform);
         IEnumerable<games> GetGamesByGenre(string genre);
+        IEnumerable<games> GetGamesMadeByTeam(string team);
+        IEnumerable<games> GetGamesWithPriceBelowGivenPrice(decimal value);
     }
 }

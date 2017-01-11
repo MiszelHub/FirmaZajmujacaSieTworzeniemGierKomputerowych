@@ -18,6 +18,9 @@ namespace WamesRepository
             Departments = new DepartmentsRepository(wamesContext);
             Games = new GamesRepository(wamesContext);
             Genres = new GenreRepository(wamesContext);
+            Teams = new TeamRepository(wamesContext);
+            Positions = new PositionRepository(wamesContext);
+            AvailablePlatforms = new AvailablePlatformsRepository(wamesContext);
         }
 
         public IDepartmentsRepository Departments { get; private set; }
@@ -30,6 +33,12 @@ namespace WamesRepository
         public IHeadQuartersReposotory HeadQuarters { get; private set;}
 
         public IGenresRepository Genres { get; private set; }
+
+        public ITeamRepository Teams { get; private set; }
+
+        public IPositionRepository Positions { get; private set; }
+
+        public IAvailablePlatformsRepository AvailablePlatforms { get; private set; }
 
         public void BeginTransaction(Action action)
         {

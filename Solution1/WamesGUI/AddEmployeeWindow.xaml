@@ -17,19 +17,19 @@
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="23,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="18" Foreground="White" Text="Last name" RenderTransformOrigin="0.593,3.5"/>
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="23,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="18" Foreground="White" Text="E-mail" RenderTransformOrigin="0.593,3.5"/>
 
-        <TextBox x:Name="AddFirstName" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="142,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-        <TextBox x:Name="AddLastName" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="142,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-        <TextBox x:Name="AddEmail" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="142,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        <TextBox x:Name="AddFirstName" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="142,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Text="{Binding FirstName}"/>
+        <TextBox x:Name="AddLastName" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="142,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Text="{Binding LastName}"/>
+        <TextBox x:Name="AddEmail" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="142,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Text="{Binding Email}"/>
         <TextBlock HorizontalAlignment="Left" Height="48" Margin="17,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" FontSize="28" Foreground="White" Text="Add new employee"/>
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="23,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="18" Foreground="White" Text="Salary" RenderTransformOrigin="0.593,3.5"/>
-        <TextBox x:Name="AddSalary" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="142,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        <TextBox x:Name="AddSalary" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="142,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Text="{Binding Salary}"/>
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="21,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="18" Foreground="White" Text="Department" RenderTransformOrigin="0.593,3.5"/>
         <ListBox x:Name="DepartmentsListBox" Background="#FF363636" Foreground="#FFF" FontSize="18" HorizontalAlignment="Left" Height="30" Margin="142,295,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Departments}" SelectedItem="{Binding SelectedDepartment}"/>
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="21,346,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="18" Foreground="White" Text="Position" RenderTransformOrigin="0.593,3.5"/>
-        <ListBox x:Name="PositionsListBox" Background="#FF363636" Foreground="#FFF" FontSize="18" HorizontalAlignment="Left" Height="30" Margin="142,346,0,0" VerticalAlignment="Top" Width="200"/>
+        <ListBox x:Name="PositionsListBox" Background="#FF363636" Foreground="#FFF" FontSize="18" HorizontalAlignment="Left" Height="30" Margin="142,346,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Positions}" SelectedItem="{Binding SelectedPosition}"/>
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="21,402,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="18" Foreground="White" RenderTransformOrigin="0.593,3.5" Text="Team"/>
-        <ListBox x:Name="TeamsListBox" Background="#FF363636" Foreground="#FFF" FontSize="18" HorizontalAlignment="Left" Height="30" Margin="142,402,0,0" VerticalAlignment="Top" Width="200"/>
-        <Button x:Name="AddEmployeeButton" Content="Submit" HorizontalAlignment="Left" Margin="227,461,0,0" VerticalAlignment="Top" Width="170" Height="38" Cursor="Hand" Foreground="White" RenderTransformOrigin="1.044,1.747">
+        <ListBox x:Name="TeamsListBox" Background="#FF363636" Foreground="#FFF" FontSize="18" HorizontalAlignment="Left" Height="30" Margin="142,402,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Teams}" SelectedItem="{Binding SelectedTeam}"/>
+        <Button x:Name="AddEmployeeButton" Content="Submit" HorizontalAlignment="Left" Margin="227,461,0,0" VerticalAlignment="Top" Width="170" Height="38" Cursor="Hand" Foreground="White" RenderTransformOrigin="1.044,1.747" Command="{Binding Path=SubmitCommand}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="#FF363636"/>

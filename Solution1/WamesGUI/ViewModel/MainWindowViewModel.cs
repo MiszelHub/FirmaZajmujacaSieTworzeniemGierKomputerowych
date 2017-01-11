@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using WamesRepository;
 
@@ -21,6 +22,7 @@ namespace WamesGUI.ViewModel
         private ICommand _closeCommand;
         private ICommand _addGameCommand;
         private ICommand _addEmployeeCommand;
+        private ICommand _applyFilterCommand;
 
         public MainWindowViewModel()
         {
@@ -52,6 +54,15 @@ namespace WamesGUI.ViewModel
             availableFilters.Add("GetGamesMadeByTeam");
             availableFilters.Add("GetGamesWithPriceBelowGivenPrice");
             availableFilters.Add("GetGamesForSpecifiedPlatform");
+            availableFilters.Add("GetDepartmentsFromHeadQuarters");
+            availableFilters.Add("GetEmployeesByPositionName");
+            availableFilters.Add("GetEmployeesFromDepartment");
+            availableFilters.Add("GetEmployeesFromTheDepartmentWithSalaryHigherThanAverage");
+            availableFilters.Add("GetEmployeesFromTeam");
+            availableFilters.Add("GetEmployeesWithSalaryHigherThanAverage");
+            availableFilters.Add("GetTeamByGameTitle");
+            availableFilters.Add("GetTopEarningEmployeeByPosition");
+            availableFilters.Add("GetEmployeesFromHeadQuarters");
         }
 
         public ICommand CloseCommand
@@ -113,6 +124,130 @@ namespace WamesGUI.ViewModel
             addEmployeeView.Show();
         }
 
+        public ICommand ApplyFilterCommand
+        {
+            get
+            {
+                if (_applyFilterCommand == null)
+                {
+                    _applyFilterCommand = new RelayCommand(
+                        param => this.ApplyFilter()
+                    );
+                }
+                return _applyFilterCommand;
+            }
+        }
+
+        private void ApplyFilter()
+        {
+            test.Clear();
+
+            if (SelectedFilter == "GetGamesByGenre")
+            {
+                foreach (var item in unitOfWork.Games.GetGamesByGenre(SelectedFilterValue.ToString()))
+                {
+                    games.Add(item);
+                    test.Add(item.ToString());
+                }
+            }
+            else if(SelectedFilter == "GetGamesMadeByTeam")
+            {
+                foreach (var item in unitOfWork.Games.GetGamesMadeByTeam(SelectedFilterValue.ToString()))
+                {
+                    games.Add(item);
+                    test.Add(item.ToString());
+                }
+            }
+            else if (SelectedFilter == "GetGamesWithPriceBelowGivenPrice")
+            {
+                foreach (var item in unitOfWork.Games.GetGamesWithPriceBelowGivenPrice(Decimal.Parse(SelectedFilterValue.ToString())))
+                {
+                    games.Add(item);
+                    test.Add(item.ToString());
+                }
+            }
+            else if (SelectedFilter == "GetGamesForSpecifiedPlatform")
+            {
+                foreach (var item in unitOfWork.Games.GetGamesForSpecifiedPlatform(SelectedFilterValue.ToString()))
+                {
+                    games.Add(item);
+                    test.Add(item.ToString());
+                }
+            }
+            else if (SelectedFilter == "GetDepartmentsFromHeadQuarters")
+            {
+                foreach (var item in unitOfWork.Departments.GetDepartmentsFormHeadQuarters(SelectedFilterValue.ToString()))
+                {
+                    test.Add(item.ToString());
+                }
+            }
+            else if (SelectedFilter == "GetEmployeesByPositionName")
+            {
+                foreach (var item in unitOfWork.Employees.GetEmployeesByPositionName(SelectedFilterValue.ToString()))
+                {
+                    test.Add(item.ToString());
+                }
+            }
+            else if (SelectedFilter == "GetEmployeesFromDepartment")
+            {
+                /*foreach (var item in unitOfWork.Employees.GetEmployeesFromDepartment(SelectedFilterValue.ToString(), "test"))
+                {
+                    test.Add(item.ToString());
+                }*/
+            }
+            else if (SelectedFilter == "GetEmployeesFromTheDepartmentWithSalaryHigherThanAverage")
+            {
+                foreach (var item in unitOfWork.Employees.GetEmployeesFromTheDepartmentWithSalaryHigherThanAverage(Decimal.Parse(SelectedFilterValue.ToString())))
+                {
+                    test.Add(item.ToString());
+                }
+            }
+            else if (SelectedFilter == "GetEmployeesFromTeam")
+            {
+                foreach (var item in unitOfWork.Employees.GetEmployeesFromTeam(SelectedFilterValue.ToString()))
+                {
+                    test.Add(item.ToString());
+                }
+            }
+            else if (SelectedFilter == "GetEmployeesWithSalaryHigherThanAverage")
+            {
+                foreach (var item in unitOfWork.Employees.GetEmployeesWithSalaryHigherThanAverage(Decimal.Parse(SelectedFilterValue.ToString())))
+                {
+                    test.Add(item.ToString());
+                }
+            }
+            else if (SelectedFilter == "GetTeamByGameTitle")
+            {
+                foreach (var item in unitOfWork.Teams.GetTeamByGameTitle(SelectedFilterValue.ToString()))
+                {
+                    test.Add(item.ToString());
+                }
+            }
+            else if (SelectedFilter == "GetTopEarningEmployeeByPosition")
+            {
+                foreach (var item in unitOfWork.Employees.GetTopEarningEmployeeByPosition(SelectedFilterValue.ToString()))
+                {
+                    test.Add(item.ToString());
+                }
+            }
+            else if (SelectedFilter == "GetEmployeesFromHeadQuarters")
+            {
+                foreach (var item in unitOfWork.Employees.GetEmployeesFromHeadQuarters(SelectedFilterValue.ToString()))
+                {
+                    test.Add(item.ToString());
+                }
+            }
+
+        }
+
+        public ICommand ChangeAvailableTables
+        {
+            get
+            {
+                return new RelayCommand(p => RefreshEmployeeList());
+            }
+        }
+
 
 
         public ObservableCollection<string> HeadQuarters
@@ -145,10 +280,14 @@ namespace WamesGUI.ViewModel
         public string SelectedDBTable { get; set; }
         public string SelectedFilter { get; set; }
         public departments SelectedHeadQuarters { get; set; }
+        public string SelectedFilterValue { get; set; }
+
         public void RefreshEmployeeList()
         {
             if(SelectedDBTable != null)
             {
+                test.Clear();
+
                 if (SelectedDBTable == "Games")
                 {
                     foreach (var item in unitOfWork.Games.GetAllEtitiesFromDataBase())
@@ -163,6 +302,60 @@ namespace WamesGUI.ViewModel
                     {
                         //games.Add(item);
                         headquarters.Add(item);
+                        test.Add(item.ToString());
+                    }
+                }
+                else if (SelectedDBTable == "Departments")
+                {
+                    foreach (var item in unitOfWork.Departments.GetAllEtitiesFromDataBase())
+                    {
+                        //games.Add(item);
+                        //headquarters.Add(item);
+                        test.Add(item.ToString());
+                    }
+                }
+                else if (SelectedDBTable == "Employees")
+                {
+                    foreach (var item in unitOfWork.Employees.GetAllEtitiesFromDataBase())
+                    {
+                        //games.Add(item);
+                        //headquarters.Add(item);
+                        test.Add(item.ToString());
+                    }
+                }
+                else if (SelectedDBTable == "Genre")
+                {
+                    foreach (var item in unitOfWork.Genres.GetAllEtitiesFromDataBase())
+                    {
+                        //games.Add(item);
+                        //headquarters.Add(item);
+                        test.Add(item.ToString());
+                    }
+                }
+                else if (SelectedDBTable == "Positions")
+                {
+                    foreach (var item in unitOfWork.Positions.GetAllEtitiesFromDataBase())
+                    {
+                        //games.Add(item);
+                        //headquarters.Add(item);
+                        test.Add(item.ToString());
+                    }
+                }
+                else if (SelectedDBTable == "Teams")
+                {
+                    foreach (var item in unitOfWork.Teams.GetAllEtitiesFromDataBase())
+                    {
+                        //games.Add(item);
+                        //headquarters.Add(item);
+                        test.Add(item.ToString());
+                    }
+                }
+                else if (SelectedDBTable == "Available platforms")
+                {
+                    foreach (var item in unitOfWork.AvailablePlatforms.GetAllEtitiesFromDataBase())
+                    {
+                        //games.Add(item);
+                        //headquarters.Add(item);
                         test.Add(item.ToString());
                     }
                 }

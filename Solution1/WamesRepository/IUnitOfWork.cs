@@ -13,6 +13,10 @@ namespace WamesRepository
         IDepartmentsRepository Departments { get; }
         IGamesRepository Games { get; }
         IGenresRepository Genres { get; }
+        ITeamRepository Teams { get; }
+        IPositionRepository Positions { get; }
+        IAvailablePlatformsRepository AvailablePlatforms { get; }
+
         void ProcesChanges();
         void BeginTransaction(Action action);
     }

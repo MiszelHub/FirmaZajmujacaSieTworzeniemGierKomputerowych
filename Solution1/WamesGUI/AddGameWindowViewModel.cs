@@ -15,6 +15,7 @@ namespace WamesGUI.ViewModel
         private ObservableCollection<string> genresText;
         private ObservableCollection<string> teamsText;
         private UnitOfWork unitOfWork;
+        private ICommand _submitGameCommand;
 
         public AddGameWindowViewModel()
         {
@@ -23,8 +24,47 @@ namespace WamesGUI.ViewModel
             genresText = new ObservableCollection<string>();
             teamsText = new ObservableCollection<string>();
             unitOfWork = new UnitOfWork(new WamesModel());
+            
 
             RefreshGenresList();
+            RefreshTeamsList();
+        }
+
+        public ICommand SubmitCommand
+        {
+            get
+            {
+                if (_submitGameCommand == null)
+                {
+                    _submitGameCommand = new RelayCommand(
+                        param => this.AddNewGame(),
+                        param => CanAddNewGame()
+                    );
+                }
+                return _submitGameCommand;
+            }
+        }
+
+        private bool CanAddNewGame()
+        {
+            return Title != null;
+        }
+
+        private void AddNewGame()
+        {
+            games newGame = new games();
+            newGame.id = 3;
+            newGame.title = Title.ToString();
+            newGame.price = Decimal.Parse(Price.ToString());
+            genre genre = new genre();
+            genre.genre_name = SelectedGenre.ToString();
+            genre.genre_id = 1;
+            newGame.genre = genre;
+            Team team = new Team();
+            team.team_name = SelectedTeam.ToString();
+            team.team_id = 2;
+            newGame.Team = team;
+            unitOfWork.Games.AddEntityToDatabase(newGame);
         }
 
         public ObservableCollection<string> Genres
@@ -35,7 +75,21 @@ namespace WamesGUI.ViewModel
             }
         }
 
-        public ObservableCollection<string> SelectedGenre { get; set; }
+        public string SelectedGenre { get; set; }
+
+        public ObservableCollection<string> Teams
+        {
+            get
+            {
+                return teamsText;
+            }
+        }
+
+        public string SelectedTeam { get; set; }
+
+        public string Title { get; set; }
+
+        public string Price { get; set; }
 
         public void RefreshGenresList()
         {
@@ -43,6 +97,15 @@ namespace WamesGUI.ViewModel
             {
                 genres.Add(item);
                 genresText.Add(item.ToString());
+            }
+        }
+
+        public void RefreshTeamsList()
+        {
+            foreach (var item in unitOfWork.Teams.GetAllEtitiesFromDataBase())
+            {
+                teams.Add(item);
+                teamsText.Add(item.ToString());
             }
         }
     }

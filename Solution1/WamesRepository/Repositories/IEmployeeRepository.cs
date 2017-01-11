@@ -9,6 +9,12 @@ namespace WamesRepository
     public interface IEmployeeRepository :IRepository<employees>
     {
         void DeleteEmployeeByHisId(int id);
-        employees GetEmployeesFromDepartment(string DepartmentName, string HqName);
+        employees GetEmployeesFromDepartment(string DepartmentName, string hq);
+        IEnumerable<employees> GetEmployeesByPositionName(string position);
+        IEnumerable<employees> GetEmployeesFromTheDepartmentWithSalaryHigherThanAverage(decimal salary);
+        IEnumerable<employees> GetEmployeesFromTeam(string team);
+        IEnumerable<employees> GetEmployeesWithSalaryHigherThanAverage(decimal salary);
+        IEnumerable<employees> GetTopEarningEmployeeByPosition(string position);
+        IEnumerable<employees> GetEmployeesFromHeadQuarters(string hq);
     }
 }

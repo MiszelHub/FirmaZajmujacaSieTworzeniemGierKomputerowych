@@ -38,7 +38,7 @@ namespace WamesRepository
     {
         public override string ToString()
         {
-            return this.title;
+            return this.id+"  "+title+"  "+ genre.genre_name+"  "+Team.team_name;
         }
     }
 }

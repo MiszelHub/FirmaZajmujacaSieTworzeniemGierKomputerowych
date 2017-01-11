@@ -16,13 +16,13 @@
         <TextBlock HorizontalAlignment="Left" Height="48" Margin="17,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" FontSize="28" Foreground="White" Text="Add new game"/>
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="19,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="18" Foreground="White" Text="Title" RenderTransformOrigin="0.593,3.5"/>
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="19,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="18" Foreground="White" RenderTransformOrigin="0.593,3.5"><Run Text="Price"/><LineBreak/><Run/></TextBlock>
-        <TextBox x:Name="Title" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="104,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-        <TextBox x:Name="Price" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="104,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        <TextBox x:Name="Title" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="104,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Text="{Binding Title}"/>
+        <TextBox x:Name="Price" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="104,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Text="{Binding Price}"/>
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="22,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="18" Foreground="White" Text="Genre" RenderTransformOrigin="0.593,3.5"/>
         <ListBox x:Name="GenresListBox" Background="#FF363636" Foreground="#FFF" FontSize="18" HorizontalAlignment="Left" Height="90" Margin="104,205,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Genres}" SelectedItem="{Binding SelectedGenre}"/>
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="22,328,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="18" Foreground="White" Text="Team" RenderTransformOrigin="0.593,3.5"/>
-        <ListBox x:Name="TeamsListBox" Background="#FF363636" Foreground="#FFF" FontSize="18" HorizontalAlignment="Left" Height="90" Margin="104,328,0,0" VerticalAlignment="Top" Width="200"/>
-        <Button x:Name="SubmitGameButton" Content="Submit" HorizontalAlignment="Left" Margin="252,456,0,0" VerticalAlignment="Top" Width="140" Height="38" Cursor="Hand" Foreground="White" RenderTransformOrigin="1.044,1.747">
+        <ListBox x:Name="TeamsListBox" Background="#FF363636" Foreground="#FFF" FontSize="18" HorizontalAlignment="Left" Height="90" Margin="104,328,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Teams}" SelectedItem="{Binding SelectedTeam}"/>
+        <Button x:Name="SubmitGameButton" Content="Submit" HorizontalAlignment="Left" Margin="252,456,0,0" VerticalAlignment="Top" Width="140" Height="38" Cursor="Hand" Foreground="White" RenderTransformOrigin="1.044,1.747" Command="{Binding Path=SubmitCommand}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="#FF363636"/>

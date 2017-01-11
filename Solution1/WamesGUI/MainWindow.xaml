@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WamesGUI"
         xmlns:viewmodel="clr-namespace:WamesGUI.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="830" 
         WindowStartupLocation="Manual" 
@@ -17,16 +18,22 @@
         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="150" Margin="26,72,0,0" VerticalAlignment="Top" Width="765" 
                  ItemsSource="{Binding HeadQuarters}" SelectedItem="{Binding SelectedHeadQuarters}"
                  Background="#FF363636" FontSize="14" Foreground="#FFF"  FontStyle="Normal" BorderThickness="1"/>
-        <ListBox Name="TablesList" Margin="26,290,592,100" Background="#FF363636" FontSize="14" Foreground="#FFF"  RenderTransformOrigin="0.55,1.322" ItemsSource="{Binding DBTables}" SelectedItem="{Binding SelectedDBTable}"/>
+        <ListBox Name="TablesList" Margin="26,290,592,100" Background="#FF363636" FontSize="14" Foreground="#FFF"  RenderTransformOrigin="0.55,1.322" ItemsSource="{Binding DBTables}" SelectedItem="{Binding SelectedDBTable}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding ChangeAvailableTables}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
 
         <TextBlock Name="AvailableTables" HorizontalAlignment="Left" Height="27" Margin="24,258,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Width="204" FontSize="15" Foreground="White" Text="Available tables"/>
         <TextBlock x:Name="FilterData" HorizontalAlignment="Left" Height="27" Margin="278,258,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Width="285" FontSize="15" Foreground="White" Text="Available filters"/>
         <ListBox x:Name="FiltersList" Margin="278,290,259,100" Background="#FF363636" FontSize="14" Foreground="#FFF"  RenderTransformOrigin="0.55,1.322" ItemsSource="{Binding Filters}" SelectedItem="{Binding SelectedFilter}"/>
         <TextBlock x:Name="SelectedValue" HorizontalAlignment="Left" Height="27" Margin="606,258,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Width="185" FontSize="15" Foreground="White" Text="Selected filter value"/>
 
-        <TextBox Name="FilterValue" Text="{Binding SelectedItem, ElementName=FiltersList}" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="27" Margin="606,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185" RenderTransformOrigin="0.253,0.809"/>
+        <TextBox Name="FilterValue" Text="{Binding SelectedFilterValue}" Background="#FF363636" Foreground="#FFF" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Height="27" Margin="606,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185" RenderTransformOrigin="0.253,0.809"/>
 
-        <Button x:Name="FilterButton" Content="Apply filter" HorizontalAlignment="Left" Margin="606,373,0,0" VerticalAlignment="Top" Width="185" Height="38" Cursor="Hand" Foreground="White" RenderTransformOrigin="1.044,1.747">
+        <Button x:Name="FilterButton" Content="Apply filter" HorizontalAlignment="Left" Margin="606,373,0,0" VerticalAlignment="Top" Width="185" Height="38" Cursor="Hand" Foreground="White" RenderTransformOrigin="1.044,1.747" Command="{Binding Path=ApplyFilterCommand}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="#FF363636"/>

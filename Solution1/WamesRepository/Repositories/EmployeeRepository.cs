@@ -21,13 +21,43 @@ namespace WamesRepository
             
         }
 
-        public employees GetEmployeesFromDepartment(string DepartmentName, string HqName)
+        public IEnumerable<employees> GetEmployeesByPositionName(string position)
+        {
+            throw new NotImplementedException();
+        }
+
+        public employees GetEmployeesFromDepartment(string DepartmentName, string hq)
         {
             
             
             var querry = context.Database.SqlQuery<employees>("GetEmployeesFromDepartment").Single();
             
             return querry;
+        }
+
+        public IEnumerable<employees> GetEmployeesFromHeadQuarters(string hq)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<employees> GetEmployeesFromTeam(string team)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<employees> GetEmployeesFromTheDepartmentWithSalaryHigherThanAverage(decimal salary)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<employees> GetEmployeesWithSalaryHigherThanAverage(decimal salary)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<employees> GetTopEarningEmployeeByPosition(string position)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -25,10 +25,20 @@ namespace WamesRepository
 
         public IEnumerable<games> GetGamesForSpecifiedPlatform(string platform)
         {
-            var param = new SqlParameter("@GamePlatform", platform);
+            var param = new SqlParameter("GamePlatform", platform);
 
-            var querry = context.Database.SqlQuery<games>("GetGamesForSpecifiedPlatform", param);
+            var querry = context.Database.SqlQuery<games>("GetGamesForSpecifiedPlatform @GamePlatform", param);
             return querry;
+        }
+
+        public IEnumerable<games> GetGamesMadeByTeam(string team)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<games> GetGamesWithPriceBelowGivenPrice(decimal value)
+        {
+            throw new NotImplementedException();
         }
     }
 }
