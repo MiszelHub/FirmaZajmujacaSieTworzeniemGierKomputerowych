@@ -71,7 +71,7 @@ AS
 	DESC
 go
 
---exec GetGamesWithPriceBelowGivenPrice 199999
+exec GetGamesWithPriceBelowGivenPrice 199999
 IF OBJECT_ID('GetGamesForSpecifiedPlatform') IS NOT NULL
 BEGIN
 	DROP PROCEDURE GetGamesForSpecifiedPlatform
