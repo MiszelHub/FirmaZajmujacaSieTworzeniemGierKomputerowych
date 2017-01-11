@@ -72,14 +72,14 @@ CREATE TABLE wames.dbo.games
 
 CREATE TABLE wames.dbo.availablePlatforms
 (
-    platformId VARCHAR(3) IDENTITY(1,1) NOT NULL CONSTRAINT platformPK PRIMARY KEY,
+    platformId VARCHAR(3) NOT NULL CONSTRAINT platformPK PRIMARY KEY,
     platformName VARCHAR(20) NULL,
 	
 );
 
 CREATE TABLE dbo.gamePlatform
 (
-    gameId INT NOT NULL,
+    gameId INT IDENTITY(1,1) NOT NULL,
 	platformId Varchar(3) NOT NULL,
 	CONSTRAINT gameFK FOREIGN KEY (gameId) REFERENCES wames.dbo.games(id),
 	CONSTRAINT platformFK FOREIGN KEY (platformId) REFERENCES wames.dbo.availablePlatforms(platformId)
