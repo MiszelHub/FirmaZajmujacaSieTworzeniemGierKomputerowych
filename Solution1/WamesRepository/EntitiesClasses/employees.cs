@@ -36,4 +36,12 @@ namespace WamesRepository
 
         public virtual Team Team { get; set; }
     }
+
+    public partial class employees
+    {
+        public override string ToString()
+        {
+            return employee_id + "  " + first_name + "  " + last_name + "  " + email + "  " + salary + "  " + departments.department_name + "  " + positions.position_name + "  " + Team.team_name;
+        }
+    }
 }

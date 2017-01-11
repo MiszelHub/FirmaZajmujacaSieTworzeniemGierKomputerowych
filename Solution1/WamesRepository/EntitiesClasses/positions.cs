@@ -23,4 +23,12 @@ namespace WamesRepository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<employees> employees { get; set; }
     }
+
+    public partial class positions
+    {
+        public override string ToString()
+        {
+            return position_name;
+        }
+    }
 }

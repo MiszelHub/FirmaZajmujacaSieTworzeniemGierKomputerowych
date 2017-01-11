@@ -56,14 +56,22 @@ namespace WamesGUI.ViewModel
             newGame.id = 3;
             newGame.title = Title.ToString();
             newGame.price = Decimal.Parse(Price.ToString());
-            genre genre = new genre();
-            genre.genre_name = SelectedGenre.ToString();
-            genre.genre_id = 1;
-            newGame.genre = genre;
-            Team team = new Team();
-            team.team_name = SelectedTeam.ToString();
-            team.team_id = 2;
-            newGame.Team = team;
+            for(int i=0; i<genres.Count(); i++)
+            {
+                if(SelectedGenre == i)
+                {
+                    newGame.genre = genres[i];
+                }
+            }
+            
+            for(int i=0; i<teams.Count(); i++)
+            {
+                if(SelectedTeam == i)
+                {
+                    newGame.Team = teams[i];
+                }
+            }
+            
             unitOfWork.Games.AddEntityToDatabase(newGame);
         }
 
@@ -75,7 +83,7 @@ namespace WamesGUI.ViewModel
             }
         }
 
-        public string SelectedGenre { get; set; }
+        public int SelectedGenre { get; set; }
 
         public ObservableCollection<string> Teams
         {
@@ -85,7 +93,7 @@ namespace WamesGUI.ViewModel
             }
         }
 
-        public string SelectedTeam { get; set; }
+        public int SelectedTeam { get; set; }
 
         public string Title { get; set; }
 

@@ -33,4 +33,12 @@ namespace WamesRepository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<availablePlatforms> availablePlatforms { get; set; }
     }
+
+    public partial class games
+    {
+        public override string ToString()
+        {
+            return id + "  " + title + "  " + price + "  " +genre.genre_name+"  "+Team.team_name;
+        }
+    }
 }

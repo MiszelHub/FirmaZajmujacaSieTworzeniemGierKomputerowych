@@ -67,14 +67,17 @@ namespace WamesGUI.ViewModel
             department.department_id = 1;
             department.department_name = SelectedDepartment.ToString();
             employee.departments = department;
+            employee.department_id = 1;
             positions position = new positions();
             position.position_id = 2;
             position.position_name = SelectedPosition.ToString();
             employee.positions = position;
+            employee.position_id = 2;
             Team team = new Team();
             team.team_id = 2;
             team.team_name = SelectedTeam.ToString();
             employee.Team = team;
+            employee.team_id = 2;
 
             unitOfWork.Employees.AddEntityToDatabase(employee);
         }
