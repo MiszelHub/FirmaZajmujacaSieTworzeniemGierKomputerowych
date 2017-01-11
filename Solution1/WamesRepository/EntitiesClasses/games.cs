@@ -14,7 +14,6 @@ namespace WamesRepository
             availablePlatforms = new HashSet<availablePlatforms>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
 
         [StringLength(20)]
@@ -33,12 +32,5 @@ namespace WamesRepository
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<availablePlatforms> availablePlatforms { get; set; }
-    }
-    public partial class games
-    {
-        public override string ToString()
-        {
-            return this.id+"  "+title+"  "+ genre.genre_name+"  "+Team.team_name;
-        }
     }
 }

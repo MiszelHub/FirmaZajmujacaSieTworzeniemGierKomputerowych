@@ -15,7 +15,6 @@ namespace WamesRepository
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int department_id { get; set; }
 
         [StringLength(20)]
@@ -30,12 +29,4 @@ namespace WamesRepository
 
         public virtual headquarters headquarters { get; set; }
     }
-    public partial class departments
-    {
-        public override string ToString()
-        {
-            return this.department_name;
-        }
-    }
 }
-

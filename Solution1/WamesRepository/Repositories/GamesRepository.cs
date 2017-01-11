@@ -19,7 +19,7 @@ namespace WamesRepository
         {
             var param = new SqlParameter("@Genre", genre);
 
-            var querry = context.Database.SqlQuery<games>("GetGamesByGenre", param);
+            var querry = context.Database.SqlQuery<games>("GetGamesByGenre @Genre", param);
             return querry;
         }
 

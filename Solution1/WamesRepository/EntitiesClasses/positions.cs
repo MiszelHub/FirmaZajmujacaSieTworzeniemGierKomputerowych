@@ -15,7 +15,6 @@ namespace WamesRepository
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int position_id { get; set; }
 
         [StringLength(20)]
@@ -23,13 +22,5 @@ namespace WamesRepository
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<employees> employees { get; set; }
-    }
-
-    public partial class positions
-    {
-        public override string ToString()
-        {
-            return this.position_name;
-        }
     }
 }

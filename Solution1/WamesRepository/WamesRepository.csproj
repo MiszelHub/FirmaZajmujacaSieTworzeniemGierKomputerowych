@@ -11,6 +11,7 @@
     <AssemblyName>WamesRepository</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,7 +24,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -66,16 +66,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repositories\AvailablePlatformsRepository.cs" />
-    <Compile Include="Repositories\GamesRepository.cs" />
-    <Compile Include="Repositories\DepartmentsRepository.cs" />
-    <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="EntitiesClasses\availablePlatforms.cs" />
     <Compile Include="EntitiesClasses\departments.cs" />
     <Compile Include="EntitiesClasses\employees.cs" />
     <Compile Include="EntitiesClasses\games.cs" />
     <Compile Include="EntitiesClasses\genre.cs" />
     <Compile Include="EntitiesClasses\headquarters.cs" />
+    <Compile Include="EntitiesClasses\positions.cs" />
+    <Compile Include="Repositories\AvailablePlatformsRepository.cs" />
+    <Compile Include="Repositories\GamesRepository.cs" />
+    <Compile Include="Repositories\DepartmentsRepository.cs" />
+    <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\GenreRepository.cs" />
     <Compile Include="Repositories\HeadQuartersRepository.cs" />
     <Compile Include="Repositories\IAvailablePlatformsRepository.cs" />
@@ -90,12 +91,11 @@
     <Compile Include="Repositories\PositionRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\TeamRepository.cs" />
+    <Compile Include="EntitiesClasses\Team.cs" />
     <Compile Include="UnitOfWork.cs" />
-    <Compile Include="WamesModel.cs" />
-    <Compile Include="EntitiesClasses\positions.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EntitiesClasses\Team.cs" />
+    <Compile Include="WamesModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -113,6 +113,10 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

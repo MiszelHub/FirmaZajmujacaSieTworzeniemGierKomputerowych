@@ -6,11 +6,9 @@ namespace WamesRepository
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-   
     public partial class employees
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int employee_id { get; set; }
 
         [StringLength(20)]
@@ -37,13 +35,5 @@ namespace WamesRepository
         public virtual positions positions { get; set; }
 
         public virtual Team Team { get; set; }
-    }
-
-    public partial class employees
-    {
-        public override string ToString()
-        {
-            return this.employee_id + "  " + first_name + "  " + last_name + "  " + email + "  " + salary+"  "+departments.department_name+"  "+positions.position_name+"  "+Team.team_name;
-        }
     }
 }
