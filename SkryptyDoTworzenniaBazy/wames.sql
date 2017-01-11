@@ -10,14 +10,14 @@ use wames
 
 CREATE TABLE wames.dbo.headquarters
 (
-	headquarters_id INT NOT NULL CONSTRAINT headquarters_PK PRIMARY KEY,
+	headquarters_id INT IDENTITY(1,1) NOT NULL CONSTRAINT headquarters_PK PRIMARY KEY,
 	headquarters_name VARCHAR(20),
 	city VARCHAR(20)
 );
 
 CREATE TABLE wames.dbo.departments
 (
-	department_id INT NOT NULL CONSTRAINT departments_PK PRIMARY KEY,
+	department_id INT IDENTITY(1,1) NOT NULL CONSTRAINT departments_PK PRIMARY KEY,
 	department_name VARCHAR(20),
 	max_employees INT NOT NULL,
 	headquarters_id INT NOT NULL, 
@@ -26,19 +26,19 @@ CREATE TABLE wames.dbo.departments
 
 create table wames.dbo.positions
 (
-	position_id INT NOT NULL CONSTRAINT positions_PK PRIMARY KEY,
+	position_id INT IDENTITY(1,1) NOT NULL CONSTRAINT positions_PK PRIMARY KEY,
 	position_name VARCHAR(20)
 );
 CREATE TABLE dbo.Team
 (
-    team_id INT NOT NULL CONSTRAINT	team_PK PRIMARY KEY,
+    team_id INT IDENTITY(1,1) NOT NULL CONSTRAINT	team_PK PRIMARY KEY,
 	team_name VARCHAR(50),
 	
 );
 
 CREATE TABLE wames.dbo.employees
 (
-	employee_id    INT NOT NULL CONSTRAINT employees_PK PRIMARY KEY,
+	employee_id    INT IDENTITY(1,1) NOT NULL CONSTRAINT employees_PK PRIMARY KEY,
     first_name     VARCHAR(20),
     last_name      VARCHAR(25)
 	CONSTRAINT     emp_last_name_nn  NOT NULL,
@@ -54,14 +54,14 @@ CREATE TABLE wames.dbo.employees
 
 CREATE TABLE wames.dbo.genre
 (
-	genre_id INT NOT NULL CONSTRAINT genre_PK PRIMARY KEY,
+	genre_id INT IDENTITY(1,1) NOT NULL CONSTRAINT genre_PK PRIMARY KEY,
 	genre_name varchar(20)
 );
 
 
 CREATE TABLE wames.dbo.games
 (
-	id INT NOT NULL CONSTRAINT games_PK PRIMARY KEY,
+	id INT IDENTITY(1,1) NOT NULL CONSTRAINT games_PK PRIMARY KEY,
 	title VARCHAR(20),
 	price MONEY NOT NULL,
 	genre_id INT NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE wames.dbo.games
 
 CREATE TABLE wames.dbo.availablePlatforms
 (
-    platformId VARCHAR(3) NOT NULL CONSTRAINT platformPK PRIMARY KEY,
+    platformId VARCHAR(3) IDENTITY(1,1) NOT NULL CONSTRAINT platformPK PRIMARY KEY,
     platformName VARCHAR(20) NULL,
 	
 );
