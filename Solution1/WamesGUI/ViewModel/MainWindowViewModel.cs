@@ -27,7 +27,7 @@ namespace WamesGUI.ViewModel
         public MainWindowViewModel()
         {
             games = new ObservableCollection<games>();
-            unitOfWork = new UnitOfWork(new WamesModel());
+            unitOfWork = new UnitOfWork(new wamesEntities());
             test = new ObservableCollection<string>();
             tables = new ObservableCollection<string>();
             availableFilters = new ObservableCollection<string>();
@@ -59,7 +59,6 @@ namespace WamesGUI.ViewModel
             availableFilters.Add("GetEmployeesFromDepartment");
             availableFilters.Add("GetEmployeesFromTheDepartmentWithSalaryHigherThanAverage");
             availableFilters.Add("GetEmployeesFromTeam");
-            availableFilters.Add("GetEmployeesWithSalaryHigherThanAverage");
             availableFilters.Add("GetTeamByGameTitle");
             availableFilters.Add("GetTopEarningEmployeeByPosition");
             availableFilters.Add("GetEmployeesFromHeadQuarters");
@@ -197,21 +196,14 @@ namespace WamesGUI.ViewModel
             }
             else if (SelectedFilter == "GetEmployeesFromTheDepartmentWithSalaryHigherThanAverage")
             {
-                foreach (var item in unitOfWork.Employees.GetEmployeesFromTheDepartmentWithSalaryHigherThanAverage(Decimal.Parse(SelectedFilterValue.ToString())))
+                foreach (var item in unitOfWork.Employees.GetEmployeesFromTheDepartmentWithSalaryHigherThanAverage(SelectedFilterValue.ToString()))
                 {
                     test.Add(item.ToString());
                 }
             }
             else if (SelectedFilter == "GetEmployeesFromTeam")
             {
-                foreach (var item in unitOfWork.Employees.GetEmployeesFromTeam(SelectedFilterValue.ToString()))
-                {
-                    test.Add(item.ToString());
-                }
-            }
-            else if (SelectedFilter == "GetEmployeesWithSalaryHigherThanAverage")
-            {
-                foreach (var item in unitOfWork.Employees.GetEmployeesWithSalaryHigherThanAverage(Decimal.Parse(SelectedFilterValue.ToString())))
+                foreach (var item in unitOfWork.Employees.GetEmployeesFromTeam(int.Parse(SelectedFilterValue.ToString())))
                 {
                     test.Add(item.ToString());
                 }

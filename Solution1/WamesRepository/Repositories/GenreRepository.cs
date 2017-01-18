@@ -10,7 +10,7 @@ namespace WamesRepository
 {
     public class GenreRepository : Repository<genre>, IGenresRepository
     {
-        public GenreRepository(DbContext wamesContext) : base(wamesContext)
+        public GenreRepository(wamesEntities wamesContext) : base(wamesContext)
         {
         }
 
@@ -19,6 +19,7 @@ namespace WamesRepository
             var querry = context.Database.SqlQuery<genre>("GetAllGenres");
 
             return querry;
+            
         }
     }
 }

@@ -9,7 +9,7 @@ namespace WamesRepository
 {
     public class HeadQuartersRepository : Repository<headquarters>, IHeadQuartersReposotory
     {
-        public HeadQuartersRepository(DbContext context):base(context)
+        public HeadQuartersRepository(wamesEntities context):base(context)
         {
 
         }

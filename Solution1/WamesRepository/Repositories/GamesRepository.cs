@@ -10,35 +10,37 @@ namespace WamesRepository
 {
     public class GamesRepository : Repository<games>, IGamesRepository
     {
-        public GamesRepository(DbContext context):base(context)
+        public GamesRepository(wamesEntities context):base(context)
         {
 
         }
 
         public IEnumerable<games> GetGamesByGenre(string genre)
         {
-            var param = new SqlParameter("@Genre", genre);
+            //var param = new SqlParameter("@Genre", genre);
 
-            var querry = context.Database.SqlQuery<games>("GetGamesByGenre @Genre", param);
-            return querry;
+            //var querry = context.Database.SqlQuery<games>("GetGamesByGenre @Genre", param);
+            //return querry;
+            return context.GetGamesByGenre(genre);
         }
 
         public IEnumerable<games> GetGamesForSpecifiedPlatform(string platform)
         {
-            var param = new SqlParameter("GamePlatform", platform);
+            //var param = new SqlParameter("GamePlatform", platform);
 
-            var querry = context.Database.SqlQuery<games>("GetGamesForSpecifiedPlatform @GamePlatform", param);
-            return querry;
+            //var querry = context.Database.SqlQuery<games>("GetGamesForSpecifiedPlatform @GamePlatform", param);
+            //return querry;
+            return context.GetGamesForSpecifiedPlatform(platform);
         }
 
         public IEnumerable<games> GetGamesMadeByTeam(string team)
         {
-            throw new NotImplementedException();
+          return context.GetGamesMadeByTeam(team);
         }
 
         public IEnumerable<games> GetGamesWithPriceBelowGivenPrice(decimal value)
         {
-            throw new NotImplementedException();
+            return context.GetGamesWithPriceBelowGivenPrice(value);
         }
     }
 }

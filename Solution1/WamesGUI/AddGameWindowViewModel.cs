@@ -23,7 +23,7 @@ namespace WamesGUI.ViewModel
             teams = new ObservableCollection<Team>();
             genresText = new ObservableCollection<string>();
             teamsText = new ObservableCollection<string>();
-            unitOfWork = new UnitOfWork(new WamesModel());
+            unitOfWork = new UnitOfWork(new wamesEntities());
             
 
             RefreshGenresList();

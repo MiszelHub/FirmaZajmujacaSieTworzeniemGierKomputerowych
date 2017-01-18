@@ -9,7 +9,7 @@ namespace WamesRepository
 {
     public class AvailablePlatformsRepository : Repository<availablePlatforms>, IAvailablePlatformsRepository
     {
-        public AvailablePlatformsRepository(DbContext context):base(context)
+        public AvailablePlatformsRepository(wamesEntities context):base(context)
         {
 
         }

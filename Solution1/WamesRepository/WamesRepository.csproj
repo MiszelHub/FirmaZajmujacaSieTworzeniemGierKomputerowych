@@ -66,13 +66,69 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntitiesClasses\availablePlatforms.cs" />
-    <Compile Include="EntitiesClasses\departments.cs" />
-    <Compile Include="EntitiesClasses\employees.cs" />
-    <Compile Include="EntitiesClasses\games.cs" />
-    <Compile Include="EntitiesClasses\genre.cs" />
-    <Compile Include="EntitiesClasses\headquarters.cs" />
-    <Compile Include="EntitiesClasses\positions.cs" />
+    <Compile Include="availablePlatforms.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CalculateAverageSalaryForHeadQuarters_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="departments.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="employees.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="games.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="genre.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmployeesByPositionName_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmployeesFromDepartment_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmployeesFromHeadQuarters_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmployeesFromTheDepartmentWithSalaryHigherThenAverage_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmployeesFromTheTeam_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetGamesByGenre_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetGamesForSpecifiedPlatform_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetGamesMadeByTeam_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetGamesWithPriceBelowGivenPrice_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPositionByName_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetTeamByGameTitle_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetTopEarningEmployeeByPosition_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetTopSalaryByPosition_Result.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="headquarters.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="positions.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\AvailablePlatformsRepository.cs" />
     <Compile Include="Repositories\GamesRepository.cs" />
     <Compile Include="Repositories\DepartmentsRepository.cs" />
@@ -91,15 +147,38 @@
     <Compile Include="Repositories\PositionRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\TeamRepository.cs" />
-    <Compile Include="EntitiesClasses\Team.cs" />
+    <Compile Include="Team.cs">
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WamesModel.cs" />
+    <Compile Include="WamesModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WamesModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WamesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WamesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WamesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WamesModel.edmx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EntityDeploy Include="WamesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WamesModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="WamesModel.edmx.diagram">
+      <DependentUpon>WamesModel.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -116,7 +195,21 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="WamesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WamesModel.edmx</DependentUpon>
+      <LastGenOutput>WamesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="WamesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WamesModel.edmx</DependentUpon>
+      <LastGenOutput>WamesModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EntitiesClasses\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

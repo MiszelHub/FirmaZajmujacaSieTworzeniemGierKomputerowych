@@ -11,7 +11,7 @@ namespace WamesRepository
 {
     public class EmployeeRepository : Repository<employees>, IEmployeeRepository
     {
-        public EmployeeRepository(DbContext wamesContext) : base(wamesContext)
+        public EmployeeRepository(wamesEntities wamesContext) : base(wamesContext)
         {
         }
 
@@ -23,7 +23,7 @@ namespace WamesRepository
 
         public IEnumerable<employees> GetEmployeesByPositionName(string position)
         {
-            throw new NotImplementedException();
+            return context.GetEmployeesByPositionName(position);
         }
 
         public employees GetEmployeesFromDepartment(string DepartmentName, string hq)
@@ -37,27 +37,24 @@ namespace WamesRepository
 
         public IEnumerable<employees> GetEmployeesFromHeadQuarters(string hq)
         {
-            throw new NotImplementedException();
+            return context.GetEmployeesFromHeadQuarters(hq);
         }
 
-        public IEnumerable<employees> GetEmployeesFromTeam(string team)
+
+        public IEnumerable<employees> GetEmployeesFromTeam(int teamId)
         {
-            throw new NotImplementedException();
+            return context.GetEmployeesFromTheTeam(teamId);
         }
 
-        public IEnumerable<employees> GetEmployeesFromTheDepartmentWithSalaryHigherThanAverage(decimal salary)
+        public IEnumerable<employees> GetEmployeesFromTheDepartmentWithSalaryHigherThanAverage(string departmentName)
         {
-            throw new NotImplementedException();
+            return context.GetEmployeesFromTheDepartmentWithSalaryHigherThenAverage(departmentName);
         }
 
-        public IEnumerable<employees> GetEmployeesWithSalaryHigherThanAverage(decimal salary)
-        {
-            throw new NotImplementedException();
-        }
 
         public IEnumerable<employees> GetTopEarningEmployeeByPosition(string position)
         {
-            throw new NotImplementedException();
+            return context.GetTopEarningEmployeeByPosition(position);
         }
     }
 }

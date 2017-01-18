@@ -8,9 +8,9 @@ namespace WamesRepository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        protected readonly WamesModel wamesContext;
+        protected readonly wamesEntities wamesContext;
 
-        public UnitOfWork(WamesModel wamesContext)
+        public UnitOfWork(wamesEntities wamesContext)
         {
             this.wamesContext = wamesContext;
             Employees = new EmployeeRepository(wamesContext);

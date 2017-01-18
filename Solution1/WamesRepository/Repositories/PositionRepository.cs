@@ -9,7 +9,7 @@ namespace WamesRepository
 {
     public class PositionRepository : Repository<positions>, IPositionRepository
     {
-        public PositionRepository(DbContext context):base(context)
+        public PositionRepository(wamesEntities context):base(context)
         {
 
         }

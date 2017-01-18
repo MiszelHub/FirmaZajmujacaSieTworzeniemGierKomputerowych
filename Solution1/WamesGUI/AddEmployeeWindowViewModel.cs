@@ -22,7 +22,7 @@ namespace WamesGUI.ViewModel
 
         public AddEmployeeWindowViewModel()
         {
-            unitOfWork = new UnitOfWork(new WamesModel());
+            unitOfWork = new UnitOfWork(new wamesEntities());
             departments = new ObservableCollection<departments>();
             departmentsText = new ObservableCollection<string>();
             teams = new ObservableCollection<Team>();

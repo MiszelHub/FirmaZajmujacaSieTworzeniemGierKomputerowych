@@ -9,9 +9,9 @@ namespace WamesRepository
 {
     public class Repository<T> : IRepository<T> where T : class, new()
     {
-        protected DbContext context;
+        protected wamesEntities context;
 
-        public Repository(DbContext context)
+        public Repository(wamesEntities context)
         {
             this.context = context; 
         }

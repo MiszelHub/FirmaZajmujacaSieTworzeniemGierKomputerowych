@@ -1,0 +1,803 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="wamesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="availablePlatforms">
+          <Key>
+            <PropertyRef Name="platformId" />
+          </Key>
+          <Property Name="platformId" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="platformName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="departments">
+          <Key>
+            <PropertyRef Name="department_id" />
+          </Key>
+          <Property Name="department_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="department_name" Type="varchar" MaxLength="20" />
+          <Property Name="max_employees" Type="int" Nullable="false" />
+          <Property Name="headquarters_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="20" />
+          <Property Name="last_name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="25" />
+          <Property Name="salary" Type="money" />
+          <Property Name="department_id" Type="int" Nullable="false" />
+          <Property Name="position_id" Type="int" Nullable="false" />
+          <Property Name="team_id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'wames.dbo.gamePlatform' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="gamePlatform">
+          <Key>
+            <PropertyRef Name="gameId" />
+            <PropertyRef Name="platformId" />
+          </Key>
+          <Property Name="gameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="platformId" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="games">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="20" />
+          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="genre_id" Type="int" Nullable="false" />
+          <Property Name="team_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="genre">
+          <Key>
+            <PropertyRef Name="genre_id" />
+          </Key>
+          <Property Name="genre_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="genre_name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="headquarters">
+          <Key>
+            <PropertyRef Name="headquarters_id" />
+          </Key>
+          <Property Name="headquarters_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="headquarters_name" Type="varchar" MaxLength="20" />
+          <Property Name="city" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="positions">
+          <Key>
+            <PropertyRef Name="position_id" />
+          </Key>
+          <Property Name="position_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="position_name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="team_id" />
+          </Key>
+          <Property Name="team_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="team_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="departments_fk">
+          <End Role="departments" Type="Self.departments" Multiplicity="1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departments">
+              <PropertyRef Name="department_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="gameFK">
+          <End Role="games" Type="Self.games" Multiplicity="1" />
+          <End Role="gamePlatform" Type="Self.gamePlatform" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="gamePlatform">
+              <PropertyRef Name="gameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="genre_fk">
+          <End Role="genre" Type="Self.genre" Multiplicity="1" />
+          <End Role="games" Type="Self.games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="genre_id" />
+            </Principal>
+            <Dependent Role="games">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="headquarters_fk">
+          <End Role="headquarters" Type="Self.headquarters" Multiplicity="1" />
+          <End Role="departments" Type="Self.departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="headquarters">
+              <PropertyRef Name="headquarters_id" />
+            </Principal>
+            <Dependent Role="departments">
+              <PropertyRef Name="headquarters_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="platformFK">
+          <End Role="availablePlatforms" Type="Self.availablePlatforms" Multiplicity="1" />
+          <End Role="gamePlatform" Type="Self.gamePlatform" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="availablePlatforms">
+              <PropertyRef Name="platformId" />
+            </Principal>
+            <Dependent Role="gamePlatform">
+              <PropertyRef Name="platformId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="positions_fk">
+          <End Role="positions" Type="Self.positions" Multiplicity="1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="positions">
+              <PropertyRef Name="position_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="position_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="team_fk">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="teamFK">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="games" Type="Self.games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="games">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CalculateAverageSalaryForHeadQuarters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DepartmentName" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="avgSalary" Type="money" />
+                <Property Name="department_id" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetDepartmentsFromHeadQuarters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="HqName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetEmployeesByPositionName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="positionName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetEmployeesFromDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DepartmentName" Type="varchar" Mode="In" />
+          <Parameter Name="HqName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetEmployeesFromHeadQuarters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="headQuartersName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetEmployeesFromTheDepartmentWithSalaryHigherThenAverage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DepartmentName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetEmployeesFromTheTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TeamId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetGamesByGenre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Genre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetGamesForSpecifiedPlatform" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GamePlatform" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetGamesMadeByTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TeamName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetGamesWithPriceBelowGivenPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Price" Type="money" Mode="In" />
+        </Function>
+        <Function Name="GetPositionByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="positionName" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="position_id" Type="int" Nullable="false" />
+                <Property Name="position_name" Type="varchar" MaxLength="20" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetTeamByGameTitle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GameTitle" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetTopEarningEmployeeByPosition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="positionName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetTopSalaryByPosition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PositionName" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Max Salary" Type="money" />
+                <Property Name="position_id" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <EntityContainer Name="wamesModelStoreContainer">
+          <EntitySet Name="availablePlatforms" EntityType="Self.availablePlatforms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="departments" EntityType="Self.departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="games" EntityType="Self.games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="genre" EntityType="Self.genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="headquarters" EntityType="Self.headquarters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="positions" EntityType="Self.positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="gamePlatform" EntityType="Self.gamePlatform" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [gamePlatform].[gameId] AS [gameId], 
+    [gamePlatform].[platformId] AS [platformId]
+    FROM [dbo].[gamePlatform] AS [gamePlatform]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="departments_fk" Association="Self.departments_fk">
+            <End Role="departments" EntitySet="departments" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="gameFK" Association="Self.gameFK">
+            <End Role="games" EntitySet="games" />
+            <End Role="gamePlatform" EntitySet="gamePlatform" />
+          </AssociationSet>
+          <AssociationSet Name="genre_fk" Association="Self.genre_fk">
+            <End Role="genre" EntitySet="genre" />
+            <End Role="games" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="headquarters_fk" Association="Self.headquarters_fk">
+            <End Role="headquarters" EntitySet="headquarters" />
+            <End Role="departments" EntitySet="departments" />
+          </AssociationSet>
+          <AssociationSet Name="platformFK" Association="Self.platformFK">
+            <End Role="availablePlatforms" EntitySet="availablePlatforms" />
+            <End Role="gamePlatform" EntitySet="gamePlatform" />
+          </AssociationSet>
+          <AssociationSet Name="positions_fk" Association="Self.positions_fk">
+            <End Role="positions" EntitySet="positions" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="team_fk" Association="Self.team_fk">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="teamFK" Association="Self.teamFK">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="games" EntitySet="games" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="wamesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="CalculateAverageSalaryForHeadQuarters_Result">
+          <Property Name="avgSalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="department_id" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetPositionByName_Result">
+          <Property Name="position_id" Type="Int32" Nullable="false" />
+          <Property Name="position_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <ComplexType Name="GetTopSalaryByPosition_Result">
+          <Property Name="Max_Salary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="position_id" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="availablePlatforms">
+          <Key>
+            <PropertyRef Name="platformId" />
+          </Key>
+          <Property Name="platformId" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="platformName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="games" Relationship="Self.gamePlatform" FromRole="availablePlatforms" ToRole="games" />
+        </EntityType>
+        <EntityType Name="departments">
+          <Key>
+            <PropertyRef Name="department_id" />
+          </Key>
+          <Property Name="department_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="department_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="max_employees" Type="Int32" Nullable="false" />
+          <Property Name="headquarters_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="employees" Relationship="Self.departments_fk" FromRole="departments" ToRole="employees" />
+          <NavigationProperty Name="headquarters" Relationship="Self.headquarters_fk" FromRole="departments" ToRole="headquarters" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="salary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="department_id" Type="Int32" Nullable="false" />
+          <Property Name="position_id" Type="Int32" Nullable="false" />
+          <Property Name="team_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="departments" Relationship="Self.departments_fk" FromRole="employees" ToRole="departments" />
+          <NavigationProperty Name="positions" Relationship="Self.positions_fk" FromRole="employees" ToRole="positions" />
+          <NavigationProperty Name="Team" Relationship="Self.team_fk" FromRole="employees" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="games">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="genre_id" Type="Int32" Nullable="false" />
+          <Property Name="team_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="genre" Relationship="Self.genre_fk" FromRole="games" ToRole="genre" />
+          <NavigationProperty Name="Team" Relationship="Self.teamFK" FromRole="games" ToRole="Team" />
+          <NavigationProperty Name="availablePlatforms" Relationship="Self.gamePlatform" FromRole="games" ToRole="availablePlatforms" />
+        </EntityType>
+        <EntityType Name="genre">
+          <Key>
+            <PropertyRef Name="genre_id" />
+          </Key>
+          <Property Name="genre_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="genre_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="games" Relationship="Self.genre_fk" FromRole="genre" ToRole="games" />
+        </EntityType>
+        <EntityType Name="headquarters">
+          <Key>
+            <PropertyRef Name="headquarters_id" />
+          </Key>
+          <Property Name="headquarters_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="headquarters_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="departments" Relationship="Self.headquarters_fk" FromRole="headquarters" ToRole="departments" />
+        </EntityType>
+        <EntityType Name="positions">
+          <Key>
+            <PropertyRef Name="position_id" />
+          </Key>
+          <Property Name="position_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="position_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employees" Relationship="Self.positions_fk" FromRole="positions" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="team_id" />
+          </Key>
+          <Property Name="team_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="team_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employees" Relationship="Self.team_fk" FromRole="Team" ToRole="employees" />
+          <NavigationProperty Name="games" Relationship="Self.teamFK" FromRole="Team" ToRole="games" />
+        </EntityType>
+        <Association Name="departments_fk">
+          <End Role="departments" Type="Self.departments" Multiplicity="1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departments">
+              <PropertyRef Name="department_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="headquarters_fk">
+          <End Role="headquarters" Type="Self.headquarters" Multiplicity="1" />
+          <End Role="departments" Type="Self.departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="headquarters">
+              <PropertyRef Name="headquarters_id" />
+            </Principal>
+            <Dependent Role="departments">
+              <PropertyRef Name="headquarters_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="positions_fk">
+          <End Role="positions" Type="Self.positions" Multiplicity="1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="positions">
+              <PropertyRef Name="position_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="position_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="team_fk">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="genre_fk">
+          <End Role="genre" Type="Self.genre" Multiplicity="1" />
+          <End Role="games" Type="Self.games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="genre_id" />
+            </Principal>
+            <Dependent Role="games">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="teamFK">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="games" Type="Self.games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="games">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="gamePlatform">
+          <End Role="games" Type="Self.games" Multiplicity="*" />
+          <End Role="availablePlatforms" Type="Self.availablePlatforms" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="wamesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="availablePlatforms" EntityType="Self.availablePlatforms" />
+          <EntitySet Name="departments" EntityType="Self.departments" />
+          <EntitySet Name="employees" EntityType="Self.employees" />
+          <EntitySet Name="games" EntityType="Self.games" />
+          <EntitySet Name="genre" EntityType="Self.genre" />
+          <EntitySet Name="headquarters" EntityType="Self.headquarters" />
+          <EntitySet Name="positions" EntityType="Self.positions" />
+          <EntitySet Name="Team" EntityType="Self.Team" />
+          <AssociationSet Name="departments_fk" Association="Self.departments_fk">
+            <End Role="departments" EntitySet="departments" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="headquarters_fk" Association="Self.headquarters_fk">
+            <End Role="headquarters" EntitySet="headquarters" />
+            <End Role="departments" EntitySet="departments" />
+          </AssociationSet>
+          <AssociationSet Name="positions_fk" Association="Self.positions_fk">
+            <End Role="positions" EntitySet="positions" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="team_fk" Association="Self.team_fk">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="genre_fk" Association="Self.genre_fk">
+            <End Role="genre" EntitySet="genre" />
+            <End Role="games" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="teamFK" Association="Self.teamFK">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="games" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="gamePlatform" Association="Self.gamePlatform">
+            <End Role="games" EntitySet="games" />
+            <End Role="availablePlatforms" EntitySet="availablePlatforms" />
+          </AssociationSet>
+          <FunctionImport Name="CalculateAverageSalaryForHeadQuarters" IsComposable="true" ReturnType="Collection(wamesModel.CalculateAverageSalaryForHeadQuarters_Result)">
+            <Parameter Name="DepartmentName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetPositionByName" IsComposable="true" EntitySet="positions" ReturnType="Collection(wamesModel.positions)">
+            <Parameter Name="positionName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetTopSalaryByPosition" IsComposable="true" ReturnType="Collection(wamesModel.GetTopSalaryByPosition_Result)">
+            <Parameter Name="PositionName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetDepartmentsFromHeadQuarters" EntitySet="departments" ReturnType="Collection(wamesModel.departments)">
+            <Parameter Name="HqName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmployeesByPositionName" EntitySet="employees" ReturnType="Collection(wamesModel.employees)">
+            <Parameter Name="positionName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmployeesFromDepartment" EntitySet="employees" ReturnType="Collection(wamesModel.employees)">
+            <Parameter Name="DepartmentName" Mode="In" Type="String" />
+            <Parameter Name="HqName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmployeesFromHeadQuarters" EntitySet="employees" ReturnType="Collection(wamesModel.employees)">
+            <Parameter Name="headQuartersName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmployeesFromTheDepartmentWithSalaryHigherThenAverage" EntitySet="employees" ReturnType="Collection(wamesModel.employees)">
+            <Parameter Name="DepartmentName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmployeesFromTheTeam" EntitySet="employees" ReturnType="Collection(wamesModel.employees)">
+            <Parameter Name="TeamId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetGamesByGenre" EntitySet="games" ReturnType="Collection(wamesModel.games)">
+            <Parameter Name="Genre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetGamesForSpecifiedPlatform" EntitySet="games" ReturnType="Collection(wamesModel.games)">
+            <Parameter Name="GamePlatform" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetGamesMadeByTeam" EntitySet="games" ReturnType="Collection(wamesModel.games)">
+            <Parameter Name="TeamName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetGamesWithPriceBelowGivenPrice" EntitySet="games" ReturnType="Collection(wamesModel.games)">
+            <Parameter Name="Price" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="GetTeamByGameTitle" EntitySet="Team" ReturnType="Collection(wamesModel.Team)">
+            <Parameter Name="GameTitle" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetTopEarningEmployeeByPosition" EntitySet="employees" ReturnType="Collection(wamesModel.employees)">
+            <Parameter Name="positionName" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetEmployeesByPositionName_Result">
+          <Property Type="Int32" Name="employee_id" Nullable="false" />
+          <Property Type="String" Name="first_name" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="last_name" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="25" />
+          <Property Type="Decimal" Name="salary" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="department_id" Nullable="false" />
+          <Property Type="Int32" Name="position_id" Nullable="false" />
+          <Property Type="Int32" Name="team_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetEmployeesFromDepartment_Result">
+          <Property Type="Int32" Name="employee_id" Nullable="false" />
+          <Property Type="String" Name="first_name" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="last_name" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="25" />
+          <Property Type="Decimal" Name="salary" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="department_id" Nullable="false" />
+          <Property Type="Int32" Name="position_id" Nullable="false" />
+          <Property Type="Int32" Name="team_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetEmployeesFromHeadQuarters_Result">
+          <Property Type="Int32" Name="employee_id" Nullable="false" />
+          <Property Type="String" Name="first_name" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="last_name" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="25" />
+          <Property Type="Decimal" Name="salary" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="department_id" Nullable="false" />
+          <Property Type="Int32" Name="position_id" Nullable="false" />
+          <Property Type="Int32" Name="team_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetEmployeesFromTheDepartmentWithSalaryHigherThenAverage_Result">
+          <Property Type="Int32" Name="employee_id" Nullable="false" />
+          <Property Type="String" Name="first_name" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="last_name" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="25" />
+          <Property Type="Decimal" Name="salary" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="department_id" Nullable="false" />
+          <Property Type="Int32" Name="position_id" Nullable="false" />
+          <Property Type="Int32" Name="team_id" Nullable="false" />
+          <Property Type="Decimal" Name="avgSalary" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="department_id1" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetEmployeesFromTheTeam_Result">
+          <Property Type="String" Name="first_name" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="last_name" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="25" />
+          <Property Type="Decimal" Name="salary" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="GetGamesByGenre_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="price" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="genre_id" Nullable="false" />
+          <Property Type="Int32" Name="team_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetGamesForSpecifiedPlatform_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="price" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="genre_id" Nullable="false" />
+          <Property Type="Int32" Name="team_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetGamesMadeByTeam_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="price" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="genre_id" Nullable="false" />
+          <Property Type="Int32" Name="team_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetGamesWithPriceBelowGivenPrice_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="price" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="genre_id" Nullable="false" />
+          <Property Type="Int32" Name="team_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetTeamByGameTitle_Result">
+          <Property Type="Int32" Name="team_id" Nullable="false" />
+          <Property Type="String" Name="team_name" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetTopEarningEmployeeByPosition_Result">
+          <Property Type="Int32" Name="employee_id" Nullable="false" />
+          <Property Type="String" Name="first_name" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="last_name" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="25" />
+          <Property Type="Decimal" Name="salary" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="department_id" Nullable="false" />
+          <Property Type="Int32" Name="position_id" Nullable="false" />
+          <Property Type="Int32" Name="team_id" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="wamesModelStoreContainer" CdmEntityContainer="wamesEntities">
+          <EntitySetMapping Name="availablePlatforms">
+            <EntityTypeMapping TypeName="wamesModel.availablePlatforms">
+              <MappingFragment StoreEntitySet="availablePlatforms">
+                <ScalarProperty Name="platformId" ColumnName="platformId" />
+                <ScalarProperty Name="platformName" ColumnName="platformName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departments">
+            <EntityTypeMapping TypeName="wamesModel.departments">
+              <MappingFragment StoreEntitySet="departments">
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
+                <ScalarProperty Name="department_name" ColumnName="department_name" />
+                <ScalarProperty Name="max_employees" ColumnName="max_employees" />
+                <ScalarProperty Name="headquarters_id" ColumnName="headquarters_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="wamesModel.employees">
+              <MappingFragment StoreEntitySet="employees">
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
+                <ScalarProperty Name="position_id" ColumnName="position_id" />
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="games">
+            <EntityTypeMapping TypeName="wamesModel.games">
+              <MappingFragment StoreEntitySet="games">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="genre_id" ColumnName="genre_id" />
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="genre">
+            <EntityTypeMapping TypeName="wamesModel.genre">
+              <MappingFragment StoreEntitySet="genre">
+                <ScalarProperty Name="genre_id" ColumnName="genre_id" />
+                <ScalarProperty Name="genre_name" ColumnName="genre_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="headquarters">
+            <EntityTypeMapping TypeName="wamesModel.headquarters">
+              <MappingFragment StoreEntitySet="headquarters">
+                <ScalarProperty Name="headquarters_id" ColumnName="headquarters_id" />
+                <ScalarProperty Name="headquarters_name" ColumnName="headquarters_name" />
+                <ScalarProperty Name="city" ColumnName="city" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="positions">
+            <EntityTypeMapping TypeName="wamesModel.positions">
+              <MappingFragment StoreEntitySet="positions">
+                <ScalarProperty Name="position_id" ColumnName="position_id" />
+                <ScalarProperty Name="position_name" ColumnName="position_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Team">
+            <EntityTypeMapping TypeName="wamesModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="team_name" ColumnName="team_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="gamePlatform" TypeName="wamesModel.gamePlatform" StoreEntitySet="gamePlatform">
+            <EndProperty Name="games">
+              <ScalarProperty Name="id" ColumnName="gameId" />
+            </EndProperty>
+            <EndProperty Name="availablePlatforms">
+              <ScalarProperty Name="platformId" ColumnName="platformId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionName="wamesModel.Store.CalculateAverageSalaryForHeadQuarters" FunctionImportName="CalculateAverageSalaryForHeadQuarters">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="wamesModel.CalculateAverageSalaryForHeadQuarters_Result">
+                <ScalarProperty Name="avgSalary" ColumnName="avgSalary" />
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="wamesModel.Store.GetPositionByName" FunctionImportName="GetPositionByName">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="wamesModel.Store.GetTopSalaryByPosition" FunctionImportName="GetTopSalaryByPosition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="wamesModel.GetTopSalaryByPosition_Result">
+                <ScalarProperty Name="Max_Salary" ColumnName="Max Salary" />
+                <ScalarProperty Name="position_id" ColumnName="position_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDepartmentsFromHeadQuarters" FunctionName="wamesModel.Store.GetDepartmentsFromHeadQuarters" />
+          <FunctionImportMapping FunctionImportName="GetEmployeesByPositionName" FunctionName="wamesModel.Store.GetEmployeesByPositionName">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeesFromDepartment" FunctionName="wamesModel.Store.GetEmployeesFromDepartment">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeesFromHeadQuarters" FunctionName="wamesModel.Store.GetEmployeesFromHeadQuarters">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeesFromTheDepartmentWithSalaryHigherThenAverage" FunctionName="wamesModel.Store.GetEmployeesFromTheDepartmentWithSalaryHigherThenAverage">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeesFromTheTeam" FunctionName="wamesModel.Store.GetEmployeesFromTheTeam">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetGamesByGenre" FunctionName="wamesModel.Store.GetGamesByGenre">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetGamesForSpecifiedPlatform" FunctionName="wamesModel.Store.GetGamesForSpecifiedPlatform">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetGamesMadeByTeam" FunctionName="wamesModel.Store.GetGamesMadeByTeam">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetGamesWithPriceBelowGivenPrice" FunctionName="wamesModel.Store.GetGamesWithPriceBelowGivenPrice">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTeamByGameTitle" FunctionName="wamesModel.Store.GetTeamByGameTitle">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTopEarningEmployeeByPosition" FunctionName="wamesModel.Store.GetTopEarningEmployeeByPosition">
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

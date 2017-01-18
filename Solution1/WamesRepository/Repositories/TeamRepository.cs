@@ -9,14 +9,16 @@ namespace WamesRepository
 {
     public class TeamRepository : Repository<Team>, ITeamRepository
     {
-        public TeamRepository(DbContext context) : base(context)
+        public TeamRepository(wamesEntities context) : base(context)
         {
 
         }
 
         public IEnumerable<Team> GetTeamByGameTitle(string title)
         {
-            throw new NotImplementedException();
+            //var querry = context.GetTeamByGameTitle(title);
+            //return querry;
+            return context.GetTeamByGameTitle(title);
         }
     }
 }
